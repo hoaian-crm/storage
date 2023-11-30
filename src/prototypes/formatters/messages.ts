@@ -1,20 +1,22 @@
-import { IMessage } from "./response";
-
 export const Messages = {
   getSuccess: {
     code: 8,
-    description: "get successfully"
+    description: 'get successfully',
   },
   createSuccess: {
     code: 24,
-    description: 'create successfully'
+    description: 'create successfully',
   },
   updateSuccess: {
     code: 14,
-    description: 'update successfully'
+    description: 'update successfully',
   },
   deleteSuccess: {
     code: 20,
-    description: 'delete successfully'
-  }
-}
+    description: 'delete successfully',
+  },
+  mustHaveFile: {
+    code: 100,
+    description: 'must post file to upload',
+  },
+};

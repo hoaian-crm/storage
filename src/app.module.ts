@@ -1,6 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
+import { StorageModule } from './modules/storage/storage.module';
 
 @Module({
   imports: [
@@ -17,6 +20,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       autoLoadEntities: true,
       logging: process.env.NODE_ENV === 'development',
     }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'files'),
+      serveRoot: '/storages',
+    }),
+
+    // Another Module
+    StorageModule,
   ],
 })
 export class AppModule {}

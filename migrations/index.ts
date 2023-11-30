@@ -1,5 +1,6 @@
 import { config } from 'dotenv';
 import { DataSource } from 'typeorm';
+import { CreateStoragePermission1701317000000 } from './1701317000000-CreateStoragePermission';
 
 config();
 
@@ -11,5 +12,5 @@ export default new DataSource({
   database: process.env.PG_DATABASE,
   port: +(process.env.PG_PORT || 5432),
   entities: [],
-  migrations: [],
+  migrations: [CreateStoragePermission1701317000000],
 });

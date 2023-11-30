@@ -1,3 +1,5 @@
+// @ts-ignore
+import { BadRequestException } from '@nestjs/common';
 import { Messages } from './messages';
 
 export type IMessage = {
@@ -39,6 +41,16 @@ export class Response<T extends any> {
     };
   }
 
+  static createBulkSuccess<T extends any>(result: Array<T>) {
+    return {
+      messages: [Messages.createSuccess],
+      data: {
+        result,
+        total: result.length,
+      },
+    };
+  }
+
   static updateSuccess<T extends any>(result: T) {
     return {
       messages: [Messages.updateSuccess],
@@ -57,5 +69,15 @@ export class Response<T extends any> {
         total: result,
       },
     };
+  }
+
+  static badRequestThrow(message: IMessage | Array<IMessage>) {
+    throw new BadRequestException({
+      messages: Array.isArray(message) ? message : [message],
+      data: {
+        result: null,
+        total: 0,
+      },
+    });
   }
 }
