@@ -3,6 +3,7 @@ syntax = "proto3";
 package event;
 
 import "interfaces/mail.proto";
+option go_package = "/pb";
 
 message IEvent {
     int64 id = 1;
