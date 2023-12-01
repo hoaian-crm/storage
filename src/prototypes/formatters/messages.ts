@@ -19,4 +19,8 @@ export const Messages = {
     code: 100,
     description: 'must post file to upload',
   },
+  notFoundTemplate: {
+    code: 101,
+    description: 'not found template',
+  },
 };

@@ -13,6 +13,8 @@ async function bootstrap() {
     options: {
       package: ['storage'],
       protoPath: ['src/prototypes/interfaces/storage.proto'],
+      maxReceiveMessageLength: 1024 * 1024 * 1024,
+      maxSendMessageLength: 1024 * 1024 * 1024,
     },
   });
 

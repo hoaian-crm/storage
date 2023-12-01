@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { existsSync, mkdirSync, writeFileSync } from 'fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
-import { IFile } from 'src/prototypes/gen/ts/interfaces/storage';
+import { IFile, ReadFile } from 'src/prototypes/gen/ts/interfaces/storage';
 
 @Injectable()
 export class StorageService {
@@ -30,5 +30,7 @@ export class StorageService {
     return join(file.destination, file.filename);
   }
 
-  async put() {}
+  async readFile(request: ReadFile) {
+    return readFileSync(join(this.uploadFolder, request.filePath));
+  }
 }

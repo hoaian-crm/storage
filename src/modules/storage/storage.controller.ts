@@ -38,10 +38,12 @@ export class StorageController implements IStorageController {
       url: result,
     };
   }
+
+  @GrpcMethod('IStorageController', 'Read')
   async Read(request: ReadFile): Promise<ReadFileResponse> {
-    console.log(request);
+    const data = await this.storageService.readFile(request);
     return {
-      content: new Uint8Array([8]),
+      content: data,
     };
   }
 
