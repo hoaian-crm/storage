@@ -14,7 +14,7 @@ message IMail {
 message SendMailDto {
   string to = 2;
   string subject = 3;
-  optional string template = 4;
-  optional string html = 5;
+  string template = 4;
+  string html = 5;
   map<string, string> context = 6;
 }

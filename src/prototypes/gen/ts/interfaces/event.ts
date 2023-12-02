@@ -35,12 +35,12 @@ export function eventsToJSON(object: Events): string {
 export interface IEvent {
   id: number;
   name: string;
-  description?: string | undefined;
+  description: string;
 }
 
 export interface CreateEventDto {
   name: string;
-  description?: string | undefined;
+  description: string;
 }
 
 export interface GetEventDto {
@@ -62,7 +62,7 @@ export interface EmitEventResult {
 }
 
 function createBaseIEvent(): IEvent {
-  return { id: 0, name: "", description: undefined };
+  return { id: 0, name: "", description: "" };
 }
 
 export const IEvent = {
@@ -73,7 +73,7 @@ export const IEvent = {
     if (message.name !== "") {
       writer.uint32(18).string(message.name);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(26).string(message.description);
     }
     return writer;
@@ -120,7 +120,7 @@ export const IEvent = {
     return {
       id: isSet(object.id) ? globalThis.Number(object.id) : 0,
       name: isSet(object.name) ? globalThis.String(object.name) : "",
-      description: isSet(object.description) ? globalThis.String(object.description) : undefined,
+      description: isSet(object.description) ? globalThis.String(object.description) : "",
     };
   },
 
@@ -132,7 +132,7 @@ export const IEvent = {
     if (message.name !== "") {
       obj.name = message.name;
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       obj.description = message.description;
     }
     return obj;
@@ -145,13 +145,13 @@ export const IEvent = {
     const message = createBaseIEvent();
     message.id = object.id ?? 0;
     message.name = object.name ?? "";
-    message.description = object.description ?? undefined;
+    message.description = object.description ?? "";
     return message;
   },
 };
 
 function createBaseCreateEventDto(): CreateEventDto {
-  return { name: "", description: undefined };
+  return { name: "", description: "" };
 }
 
 export const CreateEventDto = {
@@ -159,7 +159,7 @@ export const CreateEventDto = {
     if (message.name !== "") {
       writer.uint32(18).string(message.name);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(26).string(message.description);
     }
     return writer;
@@ -198,7 +198,7 @@ export const CreateEventDto = {
   fromJSON(object: any): CreateEventDto {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
-      description: isSet(object.description) ? globalThis.String(object.description) : undefined,
+      description: isSet(object.description) ? globalThis.String(object.description) : "",
     };
   },
 
@@ -207,7 +207,7 @@ export const CreateEventDto = {
     if (message.name !== "") {
       obj.name = message.name;
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       obj.description = message.description;
     }
     return obj;
@@ -219,7 +219,7 @@ export const CreateEventDto = {
   fromPartial<I extends Exact<DeepPartial<CreateEventDto>, I>>(object: I): CreateEventDto {
     const message = createBaseCreateEventDto();
     message.name = object.name ?? "";
-    message.description = object.description ?? undefined;
+    message.description = object.description ?? "";
     return message;
   },
 };

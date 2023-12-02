@@ -17,8 +17,8 @@ export interface IMail {
 export interface SendMailDto {
   to: string;
   subject: string;
-  template?: string | undefined;
-  html?: string | undefined;
+  template: string;
+  html: string;
   context: { [key: string]: string };
 }
 
@@ -132,7 +132,7 @@ export const IMail = {
 };
 
 function createBaseSendMailDto(): SendMailDto {
-  return { to: "", subject: "", template: undefined, html: undefined, context: {} };
+  return { to: "", subject: "", template: "", html: "", context: {} };
 }
 
 export const SendMailDto = {
@@ -143,10 +143,10 @@ export const SendMailDto = {
     if (message.subject !== "") {
       writer.uint32(26).string(message.subject);
     }
-    if (message.template !== undefined) {
+    if (message.template !== "") {
       writer.uint32(34).string(message.template);
     }
-    if (message.html !== undefined) {
+    if (message.html !== "") {
       writer.uint32(42).string(message.html);
     }
     Object.entries(message.context).forEach(([key, value]) => {
@@ -213,8 +213,8 @@ export const SendMailDto = {
     return {
       to: isSet(object.to) ? globalThis.String(object.to) : "",
       subject: isSet(object.subject) ? globalThis.String(object.subject) : "",
-      template: isSet(object.template) ? globalThis.String(object.template) : undefined,
-      html: isSet(object.html) ? globalThis.String(object.html) : undefined,
+      template: isSet(object.template) ? globalThis.String(object.template) : "",
+      html: isSet(object.html) ? globalThis.String(object.html) : "",
       context: isObject(object.context)
         ? Object.entries(object.context).reduce<{ [key: string]: string }>((acc, [key, value]) => {
           acc[key] = String(value);
@@ -232,10 +232,10 @@ export const SendMailDto = {
     if (message.subject !== "") {
       obj.subject = message.subject;
     }
-    if (message.template !== undefined) {
+    if (message.template !== "") {
       obj.template = message.template;
     }
-    if (message.html !== undefined) {
+    if (message.html !== "") {
       obj.html = message.html;
     }
     if (message.context) {
@@ -257,8 +257,8 @@ export const SendMailDto = {
     const message = createBaseSendMailDto();
     message.to = object.to ?? "";
     message.subject = object.subject ?? "";
-    message.template = object.template ?? undefined;
-    message.html = object.html ?? undefined;
+    message.template = object.template ?? "";
+    message.html = object.html ?? "";
     message.context = Object.entries(object.context ?? {}).reduce<{ [key: string]: string }>((acc, [key, value]) => {
       if (value !== undefined) {
         acc[key] = globalThis.String(value);

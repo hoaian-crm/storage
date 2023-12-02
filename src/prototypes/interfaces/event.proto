@@ -8,7 +8,7 @@ option go_package = "/pb";
 message IEvent {
     int64 id = 1;
     string name = 2;
-    optional string description = 3;
+    string description = 3;
 }
 
 service IEventController {
@@ -19,7 +19,7 @@ service IEventController {
 
 message CreateEventDto {
     string name = 2;
-    optional string description = 3;
+    string description = 3;
 }
 
 message GetEventDto {
