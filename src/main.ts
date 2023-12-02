@@ -11,7 +11,7 @@ async function bootstrap() {
   app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.GRPC,
     options: {
-      url: '0.0.0.0:30021',
+      url: '0.0.0.0:50051',
       package: ['storage'],
       protoPath: ['src/prototypes/interfaces/storage.proto'],
       maxReceiveMessageLength: 1024 * 1024 * 1024,
