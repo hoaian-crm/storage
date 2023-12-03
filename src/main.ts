@@ -15,7 +15,7 @@ async function bootstrap() {
   app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.GRPC,
     options: {
-      url: '0.0.0.0:50051',
+      url: process.env.NODE_ENV !== 'local' ? 'localhost:50051' : 'localhost:5000',
       package: ['storage'],
       protoPath: ['src/prototypes/interfaces/storage.proto'],
       maxReceiveMessageLength: 1024 * 1024 * 1024,
@@ -23,7 +23,7 @@ async function bootstrap() {
     },
   });
 
-  app.startAllMicroservices();
+  await app.startAllMicroservices();
 
   app.listen(process.env.APP_PORT || 3000, () => {
     console.log('App is listening on port ', process.env.APP_PORT || 3000);
