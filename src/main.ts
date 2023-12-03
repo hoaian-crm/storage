@@ -15,7 +15,7 @@ async function bootstrap() {
   app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.GRPC,
     options: {
-      url: process.env.NODE_ENV !== 'local' ? 'localhost:50051' : 'localhost:5000',
+      url: process.env.NODE_ENV !== 'local' ? '0.0.0.0:50051' : 'localhost:5000',
       package: ['storage'],
       protoPath: ['src/prototypes/interfaces/storage.proto'],
       maxReceiveMessageLength: 1024 * 1024 * 1024,
