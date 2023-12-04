@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
+import { Storage } from 'crm-prototypes';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
-import { IFile, ReadFile } from 'src/prototypes/gen/ts/interfaces/storage';
 
 @Injectable()
 export class StorageService {
@@ -21,7 +21,7 @@ export class StorageService {
     });
   }
 
-  async uploadOne(file: IFile) {
+  async uploadOne(file: Storage.IFile) {
     const destination = this.uploadFolder + file.destination;
     if (!existsSync(destination)) {
       mkdirSync(destination, { recursive: true });
@@ -30,7 +30,7 @@ export class StorageService {
     return join(file.destination, file.filename);
   }
 
-  async readFile(request: ReadFile) {
+  async readFile(request: Storage.ReadFile) {
     return readFileSync(join(this.uploadFolder, request.filePath));
   }
 }

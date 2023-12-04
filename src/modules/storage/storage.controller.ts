@@ -6,20 +6,11 @@ import {
 } from '@nestjs/common';
 import { GrpcMethod } from '@nestjs/microservices';
 import { AnyFilesInterceptor } from '@nestjs/platform-express';
-import { Messages } from 'src/prototypes/formatters/messages';
-import { Response } from 'src/prototypes/formatters/response';
-import {
-  HealthCheckResult,
-  IFile,
-  IStorageController,
-  PutFileResponse,
-  ReadFile,
-  ReadFileResponse,
-} from 'src/prototypes/gen/ts/interfaces/storage';
+import { Messages, Response, Storage } from 'crm-prototypes';
 import { StorageService } from './storage.service';
 
 @Controller('/storages')
-export class StorageController implements IStorageController {
+export class StorageController implements Storage.IStorageController {
   constructor(private storageService: StorageService) {}
   @Post('') // Upload file api
   @UseInterceptors(AnyFilesInterceptor())
@@ -32,7 +23,7 @@ export class StorageController implements IStorageController {
   }
 
   @GrpcMethod('IStorageController', 'Put')
-  async Put(request: IFile): Promise<PutFileResponse> {
+  async Put(request: Storage.IFile): Promise<Storage.PutFileResponse> {
     const result = await this.storageService.uploadOne(request);
     return {
       url: result,
@@ -40,7 +31,7 @@ export class StorageController implements IStorageController {
   }
 
   @GrpcMethod('IStorageController', 'Read')
-  async Read(request: ReadFile): Promise<ReadFileResponse> {
+  async Read(request: Storage.ReadFile): Promise<Storage.ReadFileResponse> {
     const data = await this.storageService.readFile(request);
     return {
       content: data,
@@ -48,7 +39,9 @@ export class StorageController implements IStorageController {
   }
 
   @GrpcMethod('IStorageController', 'HealthCheck')
-  async HealthCheck(request: HealthCheckResult): Promise<HealthCheckResult> {
+  async HealthCheck(
+    request: Storage.HealthCheckResult,
+  ): Promise<Storage.HealthCheckResult> {
     return request;
   }
 }

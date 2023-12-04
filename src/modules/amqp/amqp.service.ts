@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Channel, Connection, connect } from 'amqplib/callback_api';
-import { EmitEventDto } from 'src/prototypes/gen/ts/interfaces/event';
+import { Event } from 'crm-prototypes';
 
 @Injectable()
 export class ClientService {
@@ -35,7 +35,7 @@ export class ClientService {
     this.channel = await this.createChannel();
   }
 
-  getValueFromPayload(request: EmitEventDto) {
+  getValueFromPayload(request: Event.EmitEventDto) {
     return request.payload[Object.keys(request.payload)[0]];
   }
 }
